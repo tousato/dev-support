@@ -1,0 +1,17 @@
+FROM ubuntu:16.04
+ARG USER="root"
+
+RUN apt update && apt -y upgrade 
+RUN apt -y install build-essential libssl-dev libreadline-dev zlib1g-dev language-pack-ja iputils-ping net-tools sudo dnsutils
+RUN apt -y install openssh-server ufw curl vim wget git
+RUN mkdir /var/run/sshd
+
+RUN useradd -m ${USER} && echo "${USER}:${USER}" | chpasswd && gpasswd -a ${USER} sudo
+RUN chsh -s /bin/bash ${USER}
+RUN mkdir -p /home/${USER}/.ssh; chown ${USER} /home/${USER}/.ssh; chmod 700 /home/${USER}/.ssh
+
+CMD /usr/sbin/sshd -D && tail -f /dev/null
+
+# ssh 
+#COPY ./id_rsa.pub /home/#{USER}/.ssh/authorized_keys
+#RUN chown ${USER} /home/${USER}/.ssh/authorized_keys; chmod 600 /home/${USER}/.ssh/authorized_keys

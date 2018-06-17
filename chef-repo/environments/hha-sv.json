@@ -1,0 +1,14 @@
+{
+  "name": "hha-sv",
+  "chef_type": "environment",
+  "default_attributes": {
+    "hha-common": {
+      "user": "hhauser",
+      "group": "hhauser"
+    },
+    "postgresql": {
+      "user": "hhaadmin",
+      "password": "xxxx"
+    }
+  }
+}
