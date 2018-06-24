@@ -9,18 +9,23 @@
 users = data_bag('users')
 users.each do |user|
   u = data_bag_item('users', user)
+  user = u['id']
+  group = u['group']
+  private_key = u['private']
+  public_key = u['public'] 
+
   user u['id'] do
     home u['home']
-    group u['group']
     shell u['shell']
     manage_home true
     action :create
   end
 
-  user = u['id']
-  group = u['group']
-  private_key = u['private']
-  public_key = u['public'] 
+  group group do
+    action :create
+    members user
+    append true
+  end
 
   # ssh keyファイル設定
   directory "/home/#{user}/.ssh" do

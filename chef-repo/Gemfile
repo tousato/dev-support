@@ -2,9 +2,9 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem "chef", '12.4.1'
-gem "knife-zero", '1.8.0'
-gem "berkshelf", '3.3.0'
+gem "chef"
+gem "knife-zero"
+gem "berkshelf"
 
 gem 'rspec'
 gem 'capybara'
